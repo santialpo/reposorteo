@@ -1,0 +1,147 @@
+<div class="container mt-5 mb-5">
+        <div class="row">
+            
+            
+          
+
+            <div class="col-md -6">
+                    <div class="container">
+                            <div class="row">
+                                
+                              <div class="col">
+                                  <h1>Participantes</h1>
+                                <table class="table table-hover">
+                                    <thead>
+                                      <tr>                                        
+                                        <th scope="col">Tipo Documento</th>
+                                        <th scope="col">N° Documento</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Fecha Nacimiento</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let people of listaresultado | paginate:{ itemsPerPage: 5 , currentPage: p }">
+                                        <th scope="row">{{people.tipodoc}}</th>
+                                        <td>{{people.doc}}</td>
+                                        <td>{{people.nombre}}  {{people.apellidos}}</td>
+                                        <td>{{people.fechanac}}</td>
+                                        <td><button class="btn btn-success" (click)="open(content,'e',people.tipodoc,people.doc,people.nombre,people.apellidos,people.fechanac,people.$key)" ><i class="fa fa-edit"></i></button></td>
+                                        <td><button class="btn btn-danger" (click)="remove(people.$key)"><i class="fa fa-trash"></i></button></td>
+                                      </tr>
+                                     
+                                    </tbody>
+                             </table>
+                             <pagination-controls (pageChange)="p = $event"  
+                             previousLabel="Anterior"
+                             nextLabel="Siguiente"></pagination-controls><br>
+                             <button type="button" (click)="open(content,c)" class="btn btn-primary">Añadir Participante</button>
+                            </div>
+                            
+                            </div>
+                          </div>
+                 
+                    
+                    
+            </div>
+             
+            <div class="col-md-3 ">
+                    
+            </div>
+            
+            
+          </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+   
+    <h4 class="modal-title" id="modal-basic-title">{{titulo}} Participante </h4>
+    
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form #peopleform="ngForm">
+    
+      <div class="form-group">
+       
+        <div>
+            <div class="form-group">
+                         
+                <select class="form-control" title="Tipo de Documento"  [(ngModel)]="tipodoc" value="tipodoc" name="tipodoc"  
+                  required>
+                  <option value="tipodoc" disabled>Tipo Documento</option>
+                 <option value="CC"  >CC</option>
+                 <option value="CE"  >CE</option>
+                 <option value="PP"  >PP</option>
+                 <option value="RC"  >RC</option>
+                 <option value="TI"  >TI</option>
+                
+                  </select> 
+            </div> 
+            <div class="form-group">
+              
+                <input type="number"
+                 class="form-control" 
+                 id="doc"  
+                 placeholder="Ingrese Documento" 
+                 name="doc"
+                 [(ngModel)]="doc"
+                 required
+                 >
+  
+           </div>
+          <div class="form-group">
+              
+                <input type="text"
+                 class="form-control" 
+                 id="nombre"  
+                 placeholder="Ingrese Nombre" 
+                 name="nombre"
+                 [(ngModel)]="nombre"
+                 required>
+
+           </div>
+         
+            <div class="form-group">
+              
+                <input type="text"
+                class="form-control" 
+                id="apellidos"  
+                placeholder="Ingrese Apellidos" 
+                name="apellidos"
+                [(ngModel)]="apellidos"
+                required>
+                  
+           </div>
+           <div class="form-group">
+              
+                <p>Fecha Nacimiento</p>
+                <input type="date"
+                class="form-control" 
+                id="fechanac"  
+                placeholder="Ingrese Fecha Nacimiento" 
+                name="fechanac"
+                [(ngModel)]="fechanac"
+                required>
+              
+            </div>
+              
+              
+               
+                
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <ng-template [ngIf]="titulo=='Ingresar'">
+        <button type="button" class="btn btn-primary" (click)="onSubmit(peopleform)" [disabled]="!peopleform.valid">Aceptar</button>
+      </ng-template>
+    
+    <ng-template [ngIf]="titulo=='Editar'">
+      <button type="button" class="btn btn-primary" (click)="edit(peopleform)" [disabled]="!peopleform.valid">Aceptar</button>
+    </ng-template>
+  </div>
+</ng-template>

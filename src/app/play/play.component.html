@@ -1,0 +1,82 @@
+<div class="container mt-5 mb-5">
+    <div class="row">
+        
+        
+        <div class="col-md-3 ">
+                
+          </div>
+
+        <div class="col-md -6">
+                <div class="container">
+                        <div class="row">
+                            
+                          <div class="col">
+                              <h1>Sorteos</h1>
+                              <form #sorteoform="ngForm">
+                                  
+                                <div class="form-group">
+              
+                                    <input type="text"
+                                    class="form-control" 
+                                    id="nombre"  
+                                    placeholder="Nombre Sorteo" 
+                                    name="nombre"
+                                    [(ngModel)]="nombre"
+                                    required><br>
+                                    <button type="button" (click)="open(content,sorteoform)" class="btn btn-primary" [disabled]="!sorteoform.valid">Ejecutar Sorteo</button>
+                                </div>    
+                              </form>  
+                              
+                                  
+                           
+                            <table class="table table-hover">
+                                <thead>
+                                  <tr>                                        
+                                    <th scope="col">Nombre</th>                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let play of listaresultado  | paginate:{ itemsPerPage: 5 , currentPage: p }">                                   
+                                    <td>{{play.nombre}}</td> 
+                                    <td><button class="btn btn-danger" (click)="remove(play.$key)"><i class="fa fa-trash"></i></button></td>
+                                  </tr>
+                                 
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="p = $event"  
+                            previousLabel="Anterior"
+                            nextLabel="Siguiente"></pagination-controls><br>
+                            
+                        </div>
+                        
+                        </div>
+                      </div>
+             
+                
+                
+        </div>
+         
+        <div class="col-md-3 ">
+                
+        </div>
+        
+        
+      </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmación</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<div class="modal-body">
+  <p>¿Desea continuar con la ejecución del sorteo?</p>
+</div>
+<div class="modal-footer">  
+
+  <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click')">Cancelar</button>
+  <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Aceptar</button>
+  
+</div>
+</ng-template>

@@ -1,0 +1,53 @@
+<div class="container mt-5 mb-5">
+        <div class="row">
+            
+            
+            <div class="col-md-3 ">
+                    
+            </div>
+
+            <div class="col-md -6">
+                    <div class="container">
+                            <div class="row">
+                              <div class="col" *ngFor="let play of listplay | paginate:{ itemsPerPage: 2 , currentPage: p }">
+                                  <p>Sorteo: {{play.nombre}}</p>
+                                <table class="table table-hover" >
+                                    
+                                  <thead>
+                                      <tr>
+                                        
+                                        <th scope="col">Participante</th>
+                                        <th scope="col">Premio</th>
+                                        
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let result of showresult(play.$key) ">
+                                        
+                                        <td>{{result.person}}</td>
+                                        <td>{{result.award}}</td>
+                                       
+                                      </tr>
+                                    
+                                    </tbody>
+                             </table>
+                            
+                            </div>
+                            <pagination-controls (pageChange)="p = $event"  
+                            previousLabel="Anterior"
+                            nextLabel="Siguiente"></pagination-controls><br>
+                              
+                            </div>
+                          </div>
+                 
+                    
+                    
+            </div>
+             
+            <div class="col-md-3 ">
+                    
+            </div>
+            
+            
+          </div>
+</div>

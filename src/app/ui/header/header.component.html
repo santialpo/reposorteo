@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="../assets/img/comfenalcologo.png" width="300" height="100" class="d-inline-block align-top" alt="">
+            
+          </a> 
+   
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/Home">Inicio <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/resultados">Ganadores</a>
+          </li>          
+          <ng-template [ngIf]="!isAuth()">
+            
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
+              </li>
+        </ng-template>
+        <ng-template [ngIf]="isAuth()">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/participantes">Participantes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/premios">Premios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/sorteo">Sorteo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  (click)="logout()">Cerrar Sesion</a>
+            </li>
+        </ng-template>
+        </ul>
+      </div>
+</nav>    
